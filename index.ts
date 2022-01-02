@@ -2,11 +2,16 @@ const path = require("path")
 const fs = require("fs")
 const glob = require("fast-glob")
 
-export const combineResolvers = (props: any[]) => {
+export type resolverType = {
+  Query: {}
+  Mutation: {}
+}
+
+export const combineResolvers = (resolvers: resolverType[]) => {
   let Query = {}
   let Mutation = {}
 
-  props.map((x: any) => {
+  resolvers.map((x: any) => {
     if (x.hasOwnProperty("Query")) {
       Query = { ...Query, ...x.Query }
     }
