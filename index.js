@@ -15,22 +15,21 @@ exports.mergeSchemas = exports.combineResolvers = void 0;
 var path = require("path");
 var fs = require("fs");
 var glob = require("fast-glob");
-var combineResolvers = function (props) {
+var combineResolvers = function (resolvers) {
     var Query = {};
     var Mutation = {};
-    props.map(function (x) {
-        if (x.hasOwnProperty("Query")) {
-            Query = __assign(__assign({}, Query), x.Query);
+    resolvers.map(function (resolver) {
+        if (resolver.hasOwnProperty("Query")) {
+            Query = __assign(__assign({}, Query), resolver.Query);
         }
-        if (x.hasOwnProperty("Mutation")) {
-            Mutation = __assign(__assign({}, Mutation), x.Mutation);
+        if (resolver.hasOwnProperty("Mutation")) {
+            Mutation = __assign(__assign({}, Mutation), resolver.Mutation);
         }
     });
     return { Query: Query, Mutation: Mutation };
 };
 exports.combineResolvers = combineResolvers;
 var mergeSchemas = function (pathfiles) {
-    if (pathfiles === void 0) { pathfiles = "graphql/typeDefs/*.gql"; }
     var schemas = [];
     glob.sync(pathfiles).forEach(function (file) {
         try {

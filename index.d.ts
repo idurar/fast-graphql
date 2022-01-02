@@ -1,4 +1,4 @@
 export type resolverType = {
-  Query: {}
-  Mutation: {}
+  Query?: {}
+  Mutation?: {}
 }

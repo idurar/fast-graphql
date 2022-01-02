@@ -3,35 +3,32 @@ const fs = require("fs")
 const glob = require("fast-glob")
 
 export type resolverType = {
-  Query: {}
-  Mutation: {}
+  Query?: {}
+  Mutation?: {}
 }
 
-export const combineResolvers = (resolvers: resolverType[]) => {
+export const combineResolvers = (resolvers: resolverType[]): resolverType => {
   let Query = {}
   let Mutation = {}
 
-  resolvers.map((x: any) => {
-    if (x.hasOwnProperty("Query")) {
-      Query = { ...Query, ...x.Query }
+  resolvers.map((resolver: resolverType) => {
+    if (resolver.hasOwnProperty("Query")) {
+      Query = { ...Query, ...resolver.Query }
     }
 
-    if (x.hasOwnProperty("Mutation")) {
-      Mutation = { ...Mutation, ...x.Mutation }
+    if (resolver.hasOwnProperty("Mutation")) {
+      Mutation = { ...Mutation, ...resolver.Mutation }
     }
   })
 
   return { Query, Mutation }
 }
 
-export const mergeSchemas = (
-  pathfiles: string = "graphql/typeDefs/*.gql"
-): string[] => {
+export const mergeSchemas = (pathfiles: string): string[] => {
   let schemas: string[] = []
-
   glob.sync(pathfiles).forEach(function (file: any) {
     try {
-      const data = fs.readFileSync(path.resolve(file), "utf8")
+      const data: string = fs.readFileSync(path.resolve(file), "utf8")
       schemas.push(data)
     } catch (err) {
       throw new Error(
