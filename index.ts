@@ -7,7 +7,11 @@ export type resolverType = {
   Mutation?: {}
 }
 
-export const combineResolvers = (resolvers: resolverType[]): resolverType => {
+export const combineResolvers = ({
+  resolvers,
+}: {
+  resolvers: resolverType[]
+}): resolverType => {
   let Query = {}
   let Mutation = {}
 
@@ -24,7 +28,11 @@ export const combineResolvers = (resolvers: resolverType[]): resolverType => {
   return { Query, Mutation }
 }
 
-export const mergeSchemas = (pathfiles: string): string[] => {
+export const mergeSchemas = ({
+  pathfiles,
+}: {
+  pathfiles: string
+}): string[] => {
   let schemas: string[] = []
   glob.sync(pathfiles).forEach(function (file: any) {
     try {
@@ -38,4 +46,25 @@ export const mergeSchemas = (pathfiles: string): string[] => {
   })
 
   return schemas
+}
+
+export const generateSchema = ({
+  inputPath,
+  outPath,
+}: {
+  inputPath: string
+  outPath: string
+}): void => {
+  const mergedSchemas = mergeSchemas({ pathfiles: inputPath })
+
+  const schema = mergedSchemas.join(" ")
+
+  fs.writeFile(outPath, schema, (err) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
+
+  console.log("  ✔ Schema Generated : ", outPath)
 }
