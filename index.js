@@ -11,11 +11,12 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
-exports.mergeSchemas = exports.combineResolvers = void 0;
+exports.generateSchema = exports.mergeSchemas = exports.combineResolvers = void 0;
 var path = require("path");
 var fs = require("fs");
 var glob = require("fast-glob");
-var combineResolvers = function (resolvers) {
+var combineResolvers = function (_a) {
+    var resolvers = _a.resolvers;
     var Query = {};
     var Mutation = {};
     resolvers.map(function (resolver) {
@@ -29,7 +30,8 @@ var combineResolvers = function (resolvers) {
     return { Query: Query, Mutation: Mutation };
 };
 exports.combineResolvers = combineResolvers;
-var mergeSchemas = function (pathfiles) {
+var mergeSchemas = function (_a) {
+    var pathfiles = _a.pathfiles;
     var schemas = [];
     glob.sync(pathfiles).forEach(function (file) {
         try {
@@ -43,3 +45,16 @@ var mergeSchemas = function (pathfiles) {
     return schemas;
 };
 exports.mergeSchemas = mergeSchemas;
+var generateSchema = function (_a) {
+    var inputPath = _a.inputPath, outPath = _a.outPath;
+    var mergedSchemas = (0, exports.mergeSchemas)({ pathfiles: inputPath });
+    var schema = mergedSchemas.join(" ");
+    fs.writeFile(outPath, schema, function (err) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
+    console.log("  ✔ Schema Generated : ", outPath);
+};
+exports.generateSchema = generateSchema;
