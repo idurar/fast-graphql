@@ -59,7 +59,7 @@ export const generateSchema = ({
 
   const schema = mergedSchemas.join(" ")
 
-  fs.writeFile(outPath, schema, (err) => {
+  fs.writeFile(outPath, schema, (err: any) => {
     if (err) {
       console.error(err)
       return
