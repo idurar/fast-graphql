@@ -2,7 +2,7 @@
 
 Graphql Tools to Strucutre , Combine Resolvers , Merge Schema Definitions and generate schema file
 
-# Install
+## Install
 
 ```
 npm i fast-graphql
@@ -12,11 +12,12 @@ npm i fast-graphql
 yarn add fast-graphql
 ```
 
-# Example : Demo : Next.js Graphql Server that use fast-graphql
+## Example : Next.js Graphql Server that use fast-graphql
 
 [https://github.com/idurar/next-js-graphql-apollo-server-starter](https://github.com/idurar/next-js-graphql-apollo-server-starter)
 
-# To Merge Schema
+
+## To Merge Schema
 
 ```
 import { mergeSchemas } from 'fast-graphql';
@@ -29,7 +30,7 @@ export default mergedSchemas;
 
 ```
 
-# To Combine Resolvers
+## To Combine Resolvers
 
 ```
 import { combineResolvers, resolverType } from 'fast-graphql';
@@ -46,7 +47,7 @@ export default cominedResolvers;
 
 ```
 
-# To Generate Resolvers
+## To Generate Schema file
 
 ```
 ./scripts/generateSchema.js 
