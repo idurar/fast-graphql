@@ -1,6 +1,6 @@
 {
   "name": "fast-graphql",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Graphql Tools to Strucutre , Combine Resolvers and Merge Schema Definitions",
   "main": "index.js",
   "scripts": {
