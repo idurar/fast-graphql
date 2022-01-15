@@ -6,7 +6,6 @@ Graphql Tools to Strucutre , Combine Resolvers , Merge Schema Definitions and ge
 
 ```
 npm i fast-graphql
-
 ```
 
 ```
@@ -50,6 +49,8 @@ export default cominedResolvers;
 # To Generate Resolvers
 
 ```
+./scripts/generateSchema.js 
+
 const { generateSchema } = require('fast-graphql');
 
 const inputPath = './backend/graphql/typeDefs/*.gql';
@@ -58,3 +59,15 @@ const outPath = './backend/graphql/schema.graphql';
 generateSchema({ inputPath, outPath });
 
 ```
+
+```
+# package.json
+
+"scripts": {
+    "dev": "yarn generate && next dev",
+    ...
+    "generate:schema": "node ./scripts/generateSchema"
+  },
+
+```
+
