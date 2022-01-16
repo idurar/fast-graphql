@@ -50,21 +50,36 @@ export const mergeSchemas = ({
 
 export const generateSchema = ({
   inputPath,
-  outPath,
+  schemaPath = "",
+  typeDefsPath = "",
 }: {
   inputPath: string
-  outPath: string
+  schemaPath?: string
+  typeDefsPath?: string
 }): void => {
   const mergedSchemas = mergeSchemas({ pathfiles: inputPath })
 
   const schema = mergedSchemas.join(" ")
 
-  fs.writeFile(outPath, schema, (err: any) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-  })
+  if (schemaPath !== "") {
+    fs.writeFile(schemaPath, schema, (err: any) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+    })
+    console.log("  ✔ Schema Generated : ", schemaPath)
+  }
 
-  console.log("  ✔ Schema Generated : ", outPath)
+  if (typeDefsPath !== "") {
+    const typeDefs = "export default `" + schema + "`;"
+
+    fs.writeFile(typeDefsPath, typeDefs, (err) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+    })
+    console.log("  ✔ typeDefs Generated : ", typeDefsPath)
+  }
 }
