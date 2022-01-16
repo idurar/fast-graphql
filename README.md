@@ -47,17 +47,18 @@ export default cominedResolvers;
 
 ```
 
-## To Generate Schema file
+## To Generate Schema file (recomended to deply to vercel easly)
 
 ```
 ./scripts/generateSchema.js 
 
 const { generateSchema } = require('fast-graphql');
 
-const inputPath = './backend/graphql/typeDefs/*.gql';
-const outPath = './backend/graphql/schema.graphql';
+const inputPath = './graphql/typeDefs/*.gql';
+const schemaPath = './graphql/schema.graphql';
+const typeDefsPath = './graphql/typeDefs/index.ts';
 
-generateSchema({ inputPath, outPath });
+generateSchema({ inputPath, schemaPath, typeDefsPath });
 
 ```
 
