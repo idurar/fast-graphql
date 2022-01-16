@@ -59,7 +59,7 @@ export const generateSchema = ({
 }): void => {
   const mergedSchemas = mergeSchemas({ pathfiles: inputPath })
 
-  const schema = mergedSchemas.join(" ")
+  const schema: string = mergedSchemas.join(" ")
 
   if (schemaPath !== "") {
     fs.writeFile(schemaPath, schema, (err: any) => {
@@ -72,9 +72,9 @@ export const generateSchema = ({
   }
 
   if (typeDefsPath !== "") {
-    const typeDefs = "export default `" + schema + "`;"
+    const typeDefs: string = "export default `" + schema + "`;"
 
-    fs.writeFile(typeDefsPath, typeDefs, (err) => {
+    fs.writeFile(typeDefsPath, typeDefs, (err: any) => {
       if (err) {
         console.error(err)
         return
