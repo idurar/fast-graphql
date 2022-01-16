@@ -47,7 +47,7 @@ export default cominedResolvers;
 
 ```
 
-## To Generate Schema file (recomended to deply to vercel easly)
+## To Generate Schema file (recomended to deploy to vercel easly)
 
 ```
 ./scripts/generateSchema.js 
