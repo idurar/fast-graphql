@@ -46,15 +46,27 @@ var mergeSchemas = function (_a) {
 };
 exports.mergeSchemas = mergeSchemas;
 var generateSchema = function (_a) {
-    var inputPath = _a.inputPath, outPath = _a.outPath;
+    var inputPath = _a.inputPath, _b = _a.schemaPath, schemaPath = _b === void 0 ? "" : _b, _c = _a.typeDefsPath, typeDefsPath = _c === void 0 ? "" : _c;
     var mergedSchemas = (0, exports.mergeSchemas)({ pathfiles: inputPath });
     var schema = mergedSchemas.join(" ");
-    fs.writeFile(outPath, schema, function (err) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
-    console.log("  ✔ Schema Generated : ", outPath);
+    if (schemaPath !== "") {
+        fs.writeFile(schemaPath, schema, function (err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+        console.log("  ✔ Schema Generated : ", schemaPath);
+    }
+    if (typeDefsPath !== "") {
+        var typeDefs = "export default `" + schema + "`;";
+        fs.writeFile(typeDefsPath, typeDefs, function (err) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+        });
+        console.log("  ✔ typeDefs Generated : ", typeDefsPath);
+    }
 };
 exports.generateSchema = generateSchema;
