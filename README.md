@@ -16,8 +16,9 @@ yarn add fast-graphql
 ```
 
 ## Example : Next.js Graphql Server that use fast-graphql
+- [Nex.js Advanced Graphql Crud MongoDB Starter](https://github.com/idurar/starter-advanced-graphql-crud-next-js-mongodb) - Starter Generic CRUD with Advanced Apollo Graphql server with Next.js and Mongodb (TypeScript)
 
-[https://github.com/idurar/next-js-graphql-apollo-server-starter](https://github.com/idurar/next-js-graphql-apollo-server-starter)
+- [https://github.com/idurar/next-js-graphql-apollo-server-starter](https://github.com/idurar/next-js-graphql-apollo-server-starter)
 
 
 ## To Merge Schema
